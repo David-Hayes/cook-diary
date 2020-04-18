@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
-import { Header } from './components/Header';
+import { Header } from './components/Header'
 
-import { CssBaseline } from '@material-ui/core';
+import { CssBaseline } from '@material-ui/core'
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <CssBaseline />
       <Header />
     </>
-  );
+  )
 }
 
-export default App;
+export default App
