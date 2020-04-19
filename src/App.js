@@ -1,4 +1,5 @@
 import React from 'react'
+import { GlobalProvider } from './context/State'
 
 import { Header } from './components/Header'
 import { CookList } from './components/CooksList'
@@ -10,7 +11,9 @@ function App() {
     <>
       <CssBaseline />
       <Header />
-      <CookList />
+      <GlobalProvider>
+        <CookList />
+      </GlobalProvider>
     </>
   )
 }

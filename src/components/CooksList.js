@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+import { GlobalContext } from '../context/State'
 
 import {
   Table,
@@ -7,10 +8,19 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper
+  Paper,
 } from '@material-ui/core'
 
 export const CookList = () => {
+  const { cooks, getCooks } = useContext(GlobalContext)
+
+  // fetch cooks
+  useEffect(() => {
+    getCooks()
+  }, [])
+
+  console.log(cooks);
+
   return (
     <>
       <TableContainer component={Paper}>
@@ -23,9 +33,7 @@ export const CookList = () => {
               <TableCell>Date</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-
-          </TableBody>
+          <TableBody></TableBody>
         </Table>
       </TableContainer>
     </>
