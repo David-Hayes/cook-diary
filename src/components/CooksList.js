@@ -20,7 +20,7 @@ export const CookList = () => {
     getCooks()
   }, [])
 
-  console.log(cooks);
+  console.log(cooks)
 
   return (
     <>
@@ -35,7 +35,9 @@ export const CookList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {cooks.map(cook => <CookItem key={cook.ts} cook={cook} />)}
+            {cooks.map((cook) => (
+              <CookItem key={cook.ts} cook={cook} />
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
