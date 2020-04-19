@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { GlobalContext } from '../context/State'
+import { CookItem } from './CookItem'
 
 import {
   Table,
@@ -33,7 +34,9 @@ export const CookList = () => {
               <TableCell>Date</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody></TableBody>
+          <TableBody>
+            {cooks.map(cook => <CookItem key={cook.ts} cook={cook} />)}
+          </TableBody>
         </Table>
       </TableContainer>
     </>
