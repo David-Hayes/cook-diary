@@ -20,7 +20,7 @@ export const Header = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" color="inherit">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             <Link component={RouterLink} to="/" color="inherit">
