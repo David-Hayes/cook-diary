@@ -3,6 +3,7 @@ import { GlobalContext } from '../context/State'
 import { CookItem } from './CookItem'
 
 import {
+  Container,
   Table,
   TableBody,
   TableCell,
@@ -19,7 +20,7 @@ export const CookList = () => {
   useEffect(getCooks, []);
 
   return (
-    <>
+    <Container>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -37,6 +38,6 @@ export const CookList = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </>
+    </Container>
   )
 }

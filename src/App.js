@@ -6,7 +6,7 @@ import { Header } from './components/Header'
 import { CookList } from './components/CooksList'
 import { Add } from './components/Add'
 
-import { CssBaseline, Container } from '@material-ui/core'
+import { CssBaseline } from '@material-ui/core'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 
 const darkTheme = createMuiTheme({
@@ -22,16 +22,14 @@ function App() {
       <Router>
         <Header />
         <GlobalProvider>
-          <Container>
-            <Switch>
-              <Route path="/add">
-                <Add />
-              </Route>
-              <Route path="/">
-                <CookList />
-              </Route>
-            </Switch>
-          </Container>
+          <Switch>
+            <Route path="/add">
+              <Add />
+            </Route>
+            <Route path="/">
+              <CookList />
+            </Route>
+          </Switch>
         </GlobalProvider>
       </Router>
     </ThemeProvider>
