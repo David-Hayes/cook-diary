@@ -9,6 +9,7 @@ import {
   TextField,
   Select,
   MenuItem,
+  Button,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined'
@@ -27,11 +28,11 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   FormControl: {
-    marginBottom: theme.spacing(2),
+    //marginBottom: theme.spacing(2),
     minWidth: '100%',
   },
   input: {
-    marginBottom: theme.spacing(2),
+    //marginBottom: theme.spacing(2),
     minWidth: '100%',
   },
 }))
@@ -44,6 +45,9 @@ export const Add = () => {
   const [cut, setCut] = useState('')
   const [method, setMethod] = useState('')
   const [date, setDate] = useState('')
+  const [weight, setWeight] = useState('')
+  const [time, setTime] = useState('00:00:00')
+  const [notes, setNotes] = useState('')
 
   return (
     <Container component="main" maxWidth="xs">
@@ -125,6 +129,54 @@ export const Add = () => {
               shrink: true,
             }}
           />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="weight"
+            label="Weight"
+            name="weight"
+            defaultValue={weight}
+            onChange={(e) => setWeight(e.target.value)}
+            autoComplete="false"
+            className={classes.input}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="time"
+            label="Time"
+            name="time"
+            defaultValue={time}
+            onChange={(e) => setTime(e.target.value)}
+            autoComplete="false"
+            className={classes.input}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            multiline
+            id="notes"
+            label="Notes"
+            name="notes"
+            defaultValue={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            autoComplete="false"
+            className={classes.input}
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+          >
+            Save
+          </Button>
         </form>
       </div>
     </Container>
