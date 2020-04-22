@@ -16,11 +16,7 @@ export const CookList = () => {
   const { cooks, getCooks } = useContext(GlobalContext)
 
   // fetch cooks
-  useEffect(() => {
-    getCooks()
-  }, [])
-
-  console.log(cooks)
+  useEffect(getCooks, []);
 
   return (
     <>
