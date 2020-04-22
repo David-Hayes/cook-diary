@@ -17,6 +17,16 @@ exports.handler = (event, context, callback) => {
       })
       // then query the refs
       return client.query(getAllCooksDataQuery).then((ret) => {
+        ret.sort((a,b) => {
+          const date1 = Number(a.data.date.replace(/-/g,''));
+          const date2 = Number(b.data.date.replace(/-/g,''));
+          if (date1 > date2) {
+            return -1;
+          } else if (date1 < date2) {
+            return 1;
+          }
+          return 0;
+        });
         return callback(null, {
           statusCode: 200,
           body: JSON.stringify(ret)
