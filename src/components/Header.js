@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link as RouterLink } from 'react-router-dom'
 
-import { AppBar, Toolbar, Typography } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, Link } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -21,8 +22,14 @@ export const Header = () => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>Cook Diary</Typography>
-          <AddIcon />
+          <Typography variant="h6" className={classes.title}>
+            <Link component={RouterLink} to="/" color="inherit">
+              Cook Diary
+            </Link>
+          </Typography>
+          <Link component={RouterLink} to="/add" color="inherit">
+            <AddIcon />
+          </Link>
         </Toolbar>
       </AppBar>
     </div>
