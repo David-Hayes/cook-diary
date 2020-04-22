@@ -17,7 +17,7 @@ import AddOutlinedIcon from '@material-ui/icons/AddOutlined'
 const useStyles = makeStyles((theme) => ({
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.success.main,
+    backgroundColor: theme.palette.info.main,
   },
   paper: {
     display: 'flex',
