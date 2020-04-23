@@ -2,41 +2,39 @@ import faunadb from 'faunadb'
 
 const q = faunadb.query
 const client = new faunadb.Client({
-  secret: process.env.FAUNADB_SECRET
-});
+  secret: process.env.FAUNADB_SECRET,
+})
 
 exports.handler = (event, context, callback) => {
-  console.log("Function `getAll` invoked")
-  return client.query(q.Paginate(q.Match(q.Ref("indexes/all_cooks"))))
+  return client
+    .query(q.Paginate(q.Match(q.Ref('indexes/all_cooks'))))
     .then((response) => {
       const cooksRefs = response.data
-      console.log("Cooks refs", cooksRefs)
-      console.log(`${cooksRefs.length} cooks found`)
       const getAllCooksDataQuery = cooksRefs.map((ref) => {
         return q.Get(ref)
       })
       // then query the refs
       return client.query(getAllCooksDataQuery).then((ret) => {
-        ret.sort((a,b) => {
-          const date1 = Number(a.data.date.replace(/-/g,''));
-          const date2 = Number(b.data.date.replace(/-/g,''));
+        ret.sort((a, b) => {
+          const date1 = Number(a.data.date.replace(/-/g, ''))
+          const date2 = Number(b.data.date.replace(/-/g, ''))
           if (date1 > date2) {
-            return -1;
+            return -1
           } else if (date1 < date2) {
-            return 1;
+            return 1
           }
-          return 0;
-        });
+          return 0
+        })
         return callback(null, {
           statusCode: 200,
-          body: JSON.stringify(ret)
+          body: JSON.stringify(ret),
         })
       })
-    }).catch((error) => {
-      console.log("error", error)
+    })
+    .catch((error) => {
       return callback(null, {
         statusCode: 400,
-        body: JSON.stringify(error)
+        body: JSON.stringify(error),
       })
     })
 }
