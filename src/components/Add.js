@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 
 import {
   Container,
@@ -49,6 +50,21 @@ export const Add = () => {
   const [time, setTime] = useState('00:00:00')
   const [notes, setNotes] = useState('')
 
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    axios.post('/.netlify/functions/add', {
+      name,
+      protein,
+      cut,
+      method,
+      date,
+      weight,
+      time,
+      notes
+    })
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
@@ -58,7 +74,7 @@ export const Add = () => {
         <Typography component="h1" variant="h5">
           Add cook
         </Typography>
-        <form className={classes.form}>
+        <form className={classes.form} autoComplete="off" onSubmit={onSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -69,7 +85,7 @@ export const Add = () => {
             name="name"
             defaultValue={name}
             onChange={(e) => setName(e.target.value)}
-            autoComplete="false"
+            autoComplete="off"
             className={classes.input}
           />
           <FormControl className={classes.FormControl}>
@@ -99,7 +115,7 @@ export const Add = () => {
             name="cut"
             defaultValue={cut}
             onChange={(e) => setCut(e.target.value)}
-            autoComplete="false"
+            autoComplete="off"
             className={classes.input}
           />
           <FormControl className={classes.FormControl}>
@@ -139,7 +155,7 @@ export const Add = () => {
             name="weight"
             defaultValue={weight}
             onChange={(e) => setWeight(e.target.value)}
-            autoComplete="false"
+            autoComplete="off"
             className={classes.input}
           />
           <TextField
@@ -152,7 +168,7 @@ export const Add = () => {
             name="time"
             defaultValue={time}
             onChange={(e) => setTime(e.target.value)}
-            autoComplete="false"
+            autoComplete="off"
             className={classes.input}
           />
           <TextField
@@ -166,15 +182,10 @@ export const Add = () => {
             name="notes"
             defaultValue={notes}
             onChange={(e) => setNotes(e.target.value)}
-            autoComplete="false"
+            autoComplete="off"
             className={classes.input}
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-          >
+          <Button type="submit" fullWidth variant="contained" color="primary">
             Save
           </Button>
         </form>
