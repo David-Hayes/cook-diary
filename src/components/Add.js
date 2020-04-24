@@ -14,6 +14,11 @@ import {
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined'
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -36,11 +41,15 @@ const useStyles = makeStyles((theme) => ({
     //marginBottom: theme.spacing(2),
     minWidth: '100%',
   },
+  submitted: {
+    marginTop: theme.spacing(3)
+  }
 }))
 
 export const Add = () => {
   const classes = useStyles()
 
+  const [submitted, setSubmitted] = useState(false)
   const [name, setName] = useState('')
   const [protein, setProtein] = useState('')
   const [cut, setCut] = useState('')
@@ -61,8 +70,11 @@ export const Add = () => {
       date,
       weight,
       time,
-      notes
+      notes,
     })
+    .then(res => {
+      setSubmitted(true);
+    });
   }
 
   return (
@@ -74,121 +86,127 @@ export const Add = () => {
         <Typography component="h1" variant="h5">
           Add cook
         </Typography>
-        <form className={classes.form} autoComplete="off" onSubmit={onSubmit}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="name"
-            label="Cook name"
-            name="name"
-            defaultValue={name}
-            onChange={(e) => setName(e.target.value)}
-            autoComplete="off"
-            className={classes.input}
-          />
-          <FormControl className={classes.FormControl}>
-            <InputLabel id="label-protein">Protein</InputLabel>
-            <Select
-              labelId="label-protein"
-              id="select-protein"
-              value={protein}
-              onChange={(e) => setProtein(e.target.value)}
-              fullWidth
+        {submitted ? (
+          <>
+            <Alert severity="success" className={classes.submitted}>Cook saved!</Alert>
+          </>
+        ) : (
+          <form className={classes.form} autoComplete="off" onSubmit={onSubmit}>
+            <TextField
+              variant="outlined"
+              margin="normal"
               required
-            >
-              <MenuItem value=""></MenuItem>
-              <MenuItem value="Beef">Beef</MenuItem>
-              <MenuItem value="Chicken">Chicken</MenuItem>
-              <MenuItem value="Pork">Pork</MenuItem>
-              <MenuItem value="Other">Other</MenuItem>
-            </Select>
-          </FormControl>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="cut"
-            label="Cut"
-            name="cut"
-            defaultValue={cut}
-            onChange={(e) => setCut(e.target.value)}
-            autoComplete="off"
-            className={classes.input}
-          />
-          <FormControl className={classes.FormControl}>
-            <InputLabel id="label-method">Method</InputLabel>
-            <Select
-              labelId="label-method"
-              id="select-method"
-              value={method}
-              onChange={(e) => setMethod(e.target.value)}
               fullWidth
+              id="name"
+              label="Cook name"
+              name="name"
+              defaultValue={name}
+              onChange={(e) => setName(e.target.value)}
+              autoComplete="off"
+              className={classes.input}
+            />
+            <FormControl className={classes.FormControl}>
+              <InputLabel id="label-protein">Protein</InputLabel>
+              <Select
+                labelId="label-protein"
+                id="select-protein"
+                value={protein}
+                onChange={(e) => setProtein(e.target.value)}
+                fullWidth
+                required
+              >
+                <MenuItem value=""></MenuItem>
+                <MenuItem value="Beef">Beef</MenuItem>
+                <MenuItem value="Chicken">Chicken</MenuItem>
+                <MenuItem value="Pork">Pork</MenuItem>
+                <MenuItem value="Other">Other</MenuItem>
+              </Select>
+            </FormControl>
+            <TextField
+              variant="outlined"
+              margin="normal"
               required
-            >
-              <MenuItem value="Grill">Grill</MenuItem>
-              <MenuItem value="BBQ">BBQ</MenuItem>
-              <MenuItem value="Smoke">Smoke</MenuItem>
-              <MenuItem value="Roast">Roast</MenuItem>
-            </Select>
-          </FormControl>
-          <TextField
-            id="date"
-            label="Date"
-            type="date"
-            defaultValue={date}
-            onChange={(e) => setDate(e.target.value)}
-            className={classes.input}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="weight"
-            label="Weight"
-            name="weight"
-            defaultValue={weight}
-            onChange={(e) => setWeight(e.target.value)}
-            autoComplete="off"
-            className={classes.input}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="time"
-            label="Time"
-            name="time"
-            defaultValue={time}
-            onChange={(e) => setTime(e.target.value)}
-            autoComplete="off"
-            className={classes.input}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            multiline
-            id="notes"
-            label="Notes"
-            name="notes"
-            defaultValue={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            autoComplete="off"
-            className={classes.input}
-          />
-          <Button type="submit" fullWidth variant="contained" color="primary">
-            Save
-          </Button>
-        </form>
+              fullWidth
+              id="cut"
+              label="Cut"
+              name="cut"
+              defaultValue={cut}
+              onChange={(e) => setCut(e.target.value)}
+              autoComplete="off"
+              className={classes.input}
+            />
+            <FormControl className={classes.FormControl}>
+              <InputLabel id="label-method">Method</InputLabel>
+              <Select
+                labelId="label-method"
+                id="select-method"
+                value={method}
+                onChange={(e) => setMethod(e.target.value)}
+                fullWidth
+                required
+              >
+                <MenuItem value="Grill">Grill</MenuItem>
+                <MenuItem value="BBQ">BBQ</MenuItem>
+                <MenuItem value="Smoke">Smoke</MenuItem>
+                <MenuItem value="Roast">Roast</MenuItem>
+              </Select>
+            </FormControl>
+            <TextField
+              id="date"
+              label="Date"
+              type="date"
+              defaultValue={date}
+              onChange={(e) => setDate(e.target.value)}
+              className={classes.input}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="weight"
+              label="Weight"
+              name="weight"
+              defaultValue={weight}
+              onChange={(e) => setWeight(e.target.value)}
+              autoComplete="off"
+              className={classes.input}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="time"
+              label="Time"
+              name="time"
+              defaultValue={time}
+              onChange={(e) => setTime(e.target.value)}
+              autoComplete="off"
+              className={classes.input}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              multiline
+              id="notes"
+              label="Notes"
+              name="notes"
+              defaultValue={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              autoComplete="off"
+              className={classes.input}
+            />
+            <Button type="submit" fullWidth variant="contained" color="primary">
+              Save
+            </Button>
+          </form>
+        )}
       </div>
     </Container>
   )
