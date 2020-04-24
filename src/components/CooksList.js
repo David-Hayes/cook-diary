@@ -13,6 +13,11 @@ import {
   Paper,
   TextField,
 } from '@material-ui/core'
+import MuiAlert from '@material-ui/lab/Alert'
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />
+}
 
 export const CookList = () => {
   const { cooks, getCooks } = useContext(GlobalContext)
@@ -42,23 +47,31 @@ export const CookList = () => {
         defaultValue={filter}
         onChange={(e) => filterSearch(e.target.value)}
       />
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Method</TableCell>
-              <TableCell>Time</TableCell>
-              <TableCell>Date</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {cooks.map((cook) => (
-              <CookItem key={cook.ts} cook={cook} />
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      {cooks.length > 0 ? (
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell>Method</TableCell>
+                <TableCell>Time</TableCell>
+                <TableCell>Date</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {cooks.map((cook) => (
+                <CookItem key={cook.ts} cook={cook} />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : (
+        <>
+          <Alert severity="error">
+            No results found
+          </Alert>
+        </>
+      )}
     </Container>
   )
 }

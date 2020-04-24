@@ -15,7 +15,6 @@ exports.handler = (event, context, callback) => {
       })
       // then query the refs
       return client.query(getAllCooksDataQuery).then((ret) => {
-        console.log(ret)
         ret = ret
           .filter((item) =>
             item.data.name
@@ -32,10 +31,10 @@ exports.handler = (event, context, callback) => {
             }
             return 0
           })
-        return callback(null, {
+        return {
           statusCode: 200,
           body: JSON.stringify(ret),
-        })
+        }
       })
     })
     .catch((error) => {
