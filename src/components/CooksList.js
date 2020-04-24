@@ -11,16 +11,37 @@ import {
   TableHead,
   TableRow,
   Paper,
+  TextField,
 } from '@material-ui/core'
 
 export const CookList = () => {
   const { cooks, getCooks } = useContext(GlobalContext)
+  const { filter, setFilter } = useContext(GlobalContext)
+  let searchTimeout = false;
 
   // fetch cooks
-  useEffect(getCooks, []);
+  useEffect(getCooks, [filter])
+
+  const filterSearch = (filterTxt) => {
+    if(searchTimeout) clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+      setFilter(filterTxt);
+    }, 1000);
+  }
 
   return (
     <Container>
+      <TextField
+        variant="outlined"
+        margin="normal"
+        fullWidth
+        id="filter"
+        label="Filter"
+        name="filter"
+        autoComplete="off"
+        defaultValue={filter}
+        onChange={(e) => filterSearch(e.target.value)}
+      />
       <TableContainer component={Paper}>
         <Table>
           <TableHead>

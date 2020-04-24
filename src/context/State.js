@@ -19,7 +19,11 @@ export const GlobalProvider = ({ children }) => {
 
   // actions
   function getCooks() {
-    Axios.get(apiEndpoint + 'filter').then((res) =>
+    Axios.get(apiEndpoint + 'filter', {
+      params: {
+        filter: state.filter,
+      },
+    }).then((res) =>
       dispatch({
         type: 'GET_COOKS',
         payload: res.data,
@@ -27,11 +31,20 @@ export const GlobalProvider = ({ children }) => {
     )
   }
 
+  function setFilter(txt) {
+    dispatch({
+      type: 'SET_FILTER',
+      payload: txt,
+    })
+  }
+
   return (
     <GlobalContext.Provider
       value={{
         cooks: state.cooks,
         getCooks,
+        filter: state.filter,
+        setFilter,
       }}
     >
       {children}
