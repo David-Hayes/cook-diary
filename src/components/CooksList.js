@@ -17,16 +17,16 @@ import {
 export const CookList = () => {
   const { cooks, getCooks } = useContext(GlobalContext)
   const { filter, setFilter } = useContext(GlobalContext)
-  let searchTimeout = false;
+  let searchTimeout = false
 
   // fetch cooks
   useEffect(getCooks, [filter])
 
   const filterSearch = (filterTxt) => {
-    if(searchTimeout) clearTimeout(searchTimeout);
+    if (searchTimeout) clearTimeout(searchTimeout)
     searchTimeout = setTimeout(() => {
-      setFilter(filterTxt);
-    }, 1000);
+      setFilter(filterTxt)
+    }, 1000)
   }
 
   return (

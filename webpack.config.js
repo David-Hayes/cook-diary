@@ -1,9 +1,7 @@
-var webpack = require("webpack");
+var webpack = require('webpack')
 module.exports = {
-  plugins: [
-    new webpack.DefinePlugin({ "global.GENTLY": false })
-  ],
+  plugins: [new webpack.DefinePlugin({ 'global.GENTLY': false })],
   node: {
     __dirname: true,
-  }
+  },
 }

@@ -17,7 +17,11 @@ exports.handler = (event, context, callback) => {
       return client.query(getAllCooksDataQuery).then((ret) => {
         console.log(ret)
         ret = ret
-          .filter((item) => item.data.name.toLowerCase().match(event.queryStringParameters.filter))
+          .filter((item) =>
+            item.data.name
+              .toLowerCase()
+              .match(event.queryStringParameters.filter)
+          )
           .sort((a, b) => {
             const date1 = Number(a.data.date.replace(/-/g, ''))
             const date2 = Number(b.data.date.replace(/-/g, ''))

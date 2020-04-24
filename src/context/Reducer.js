@@ -3,14 +3,14 @@ export default (state, action) => {
     case 'GET_COOKS':
       return {
         ...state,
-        cooks: action.payload
+        cooks: action.payload,
       }
     case 'SET_FILTER':
       return {
         ...state,
-        filter: action.payload
+        filter: action.payload,
       }
     default:
-      return state;
+      return state
   }
 }

@@ -14,10 +14,10 @@ import {
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined'
-import MuiAlert from '@material-ui/lab/Alert';
+import MuiAlert from '@material-ui/lab/Alert'
 
 function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
+  return <MuiAlert elevation={6} variant="filled" {...props} />
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -42,8 +42,8 @@ const useStyles = makeStyles((theme) => ({
     minWidth: '100%',
   },
   submitted: {
-    marginTop: theme.spacing(3)
-  }
+    marginTop: theme.spacing(3),
+  },
 }))
 
 export const Add = () => {
@@ -62,19 +62,20 @@ export const Add = () => {
   const onSubmit = (e) => {
     e.preventDefault()
 
-    axios.post('/.netlify/functions/add', {
-      name,
-      protein,
-      cut,
-      method,
-      date,
-      weight,
-      time,
-      notes,
-    })
-    .then(res => {
-      setSubmitted(true);
-    });
+    axios
+      .post('/.netlify/functions/add', {
+        name,
+        protein,
+        cut,
+        method,
+        date,
+        weight,
+        time,
+        notes,
+      })
+      .then((res) => {
+        setSubmitted(true)
+      })
   }
 
   return (
@@ -88,7 +89,9 @@ export const Add = () => {
         </Typography>
         {submitted ? (
           <>
-            <Alert severity="success" className={classes.submitted}>Cook saved!</Alert>
+            <Alert severity="success" className={classes.submitted}>
+              Cook saved!
+            </Alert>
           </>
         ) : (
           <form className={classes.form} autoComplete="off" onSubmit={onSubmit}>

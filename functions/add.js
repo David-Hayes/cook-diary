@@ -6,7 +6,7 @@ const client = new faunadb.Client({
 })
 
 exports.handler = (event, context, callback) => {
-  const data = JSON.parse(event.body);
+  const data = JSON.parse(event.body)
   return client
     .query(q.Create(q.Collection('cooks'), { data: data }))
     .then((response) => {

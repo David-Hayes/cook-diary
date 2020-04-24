@@ -31,10 +31,11 @@ export const CookItem = ({ cook }) => {
   }
 
   const readableTime = (time) => {
-    const days = time.split(':')[0] > 0 ? time.split(':')[0]+' days ' : ''
-    const hours = time.split(':')[1] > 0 ? time.split(':')[1]+' hours ' : ''
-    const minutes = time.split(':')[2] > 0 ? time.split(':')[2]+' minutes ' : ''
-    return days+hours+minutes
+    const days = time.split(':')[0] > 0 ? time.split(':')[0] + ' days ' : ''
+    const hours = time.split(':')[1] > 0 ? time.split(':')[1] + ' hours ' : ''
+    const minutes =
+      time.split(':')[2] > 0 ? time.split(':')[2] + ' minutes ' : ''
+    return days + hours + minutes
   }
 
   return (
