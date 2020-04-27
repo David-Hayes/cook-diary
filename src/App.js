@@ -1,11 +1,20 @@
 import React from 'react'
-const netlifyIdentity = require('netlify-identity-widget')
+import { GlobalProvider } from './context/State'
+import netlifyIdentity from 'netlify-identity-widget'
+
+import { Header } from './components/Header'
+
+import { CssBaseline } from '@material-ui/core'
+
+netlifyIdentity.init()
 
 function App() {
-
-  netlifyIdentity.open();
-
-  return <></>
+  return (
+    <GlobalProvider>
+      <CssBaseline />
+      <Header />
+    </GlobalProvider>
+  )
 }
 
 export default App
