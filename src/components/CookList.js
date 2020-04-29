@@ -4,50 +4,37 @@ import { CookItem } from './CookItem'
 
 import {
   Container,
+  CircularProgress,
+  TableContainer,
   Table,
   TableBody,
   TableCell,
-  TableContainer,
   TableHead,
   TableRow,
   Paper,
-  TextField,
 } from '@material-ui/core'
-import MuiAlert from '@material-ui/lab/Alert'
+import { makeStyles } from '@material-ui/core/styles'
 
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />
-}
+const useStyles = makeStyles((theme) => ({
+  loader: {
+    textAlign: 'center',
+  },
+}))
 
 export const CookList = () => {
+  const classes = useStyles()
   const { cooks, getCooks } = useContext(GlobalContext)
-  const { filter, setFilter } = useContext(GlobalContext)
-  let searchTimeout = false
 
-  // fetch cooks
-  useEffect(getCooks, [filter])
-
-  const filterSearch = (filterTxt) => {
-    if (searchTimeout) clearTimeout(searchTimeout)
-    searchTimeout = setTimeout(() => {
-      setFilter(filterTxt)
-    }, 1000)
-  }
+  useEffect(getCooks, [])
 
   return (
     <Container>
-      <TextField
-        variant="outlined"
-        margin="normal"
-        fullWidth
-        id="filter"
-        label="Filter"
-        name="filter"
-        autoComplete="off"
-        defaultValue={filter}
-        onChange={(e) => filterSearch(e.target.value)}
-      />
-      {cooks.length > 0 ? (
+      {cooks.length === 0 && (
+        <div className={classes.loader}>
+          <CircularProgress />
+        </div>
+      )}
+      {cooks.length > 0 && (
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
@@ -65,12 +52,6 @@ export const CookList = () => {
             </TableBody>
           </Table>
         </TableContainer>
-      ) : (
-        <>
-          <Alert severity="error">
-            No results found
-          </Alert>
-        </>
       )}
     </Container>
   )

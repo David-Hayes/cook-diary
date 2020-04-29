@@ -1,10 +1,9 @@
 import React from 'react'
 import { GlobalProvider } from './context/State'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import netlifyIdentity from 'netlify-identity-widget'
 
 import { Header } from './components/Header'
-import { CookList } from './components/CooksList'
-import { Add } from './components/Add'
+import { CookList } from './components/CookList'
 
 import { CssBaseline } from '@material-ui/core'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
@@ -15,23 +14,16 @@ const darkTheme = createMuiTheme({
   },
 })
 
+netlifyIdentity.init()
+
 function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <Router>
+      <GlobalProvider>
         <Header />
-        <GlobalProvider>
-          <Switch>
-            <Route path="/add">
-              <Add />
-            </Route>
-            <Route path="/">
-              <CookList />
-            </Route>
-          </Switch>
-        </GlobalProvider>
-      </Router>
+        <CookList />
+      </GlobalProvider>
     </ThemeProvider>
   )
 }

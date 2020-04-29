@@ -5,7 +5,6 @@ import Axios from 'axios'
 // initial state
 const initialState = {
   cooks: [],
-  filter: '',
 }
 
 const apiEndpoint = '/.netlify/functions/'
@@ -19,11 +18,7 @@ export const GlobalProvider = ({ children }) => {
 
   // actions
   function getCooks() {
-    Axios.get(apiEndpoint + 'filter', {
-      params: {
-        filter: state.filter,
-      },
-    }).then((res) =>
+    Axios.get(apiEndpoint + 'getAll').then((res) =>
       dispatch({
         type: 'GET_COOKS',
         payload: res.data,
@@ -31,20 +26,11 @@ export const GlobalProvider = ({ children }) => {
     )
   }
 
-  function setFilter(txt) {
-    dispatch({
-      type: 'SET_FILTER',
-      payload: txt,
-    })
-  }
-
   return (
     <GlobalContext.Provider
       value={{
         cooks: state.cooks,
         getCooks,
-        filter: state.filter,
-        setFilter,
       }}
     >
       {children}
