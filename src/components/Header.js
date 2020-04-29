@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import netlifyIdentity from 'netlify-identity-widget'
+import { Link as RouterLink } from 'react-router-dom'
 
 import { AppBar, Toolbar, Typography, Link } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
@@ -34,15 +35,15 @@ export const Header = () => {
       <AppBar position="static" color="inherit">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            <Link to="/" color="inherit">
+            <Link component={RouterLink} to="/" color="inherit">
               Cook Diary
             </Link>
           </Typography>
-          {loggedIn &&
-            <Link to="/add" color="inherit">
+          {loggedIn && (
+            <Link component={RouterLink} to="/add" color="inherit">
               <AddIcon />
             </Link>
-          }
+          )}
         </Toolbar>
       </AppBar>
     </div>
