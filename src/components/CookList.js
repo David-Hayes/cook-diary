@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { GlobalContext } from '../context/State'
+import { CookItem } from './CookItem'
 
 import {
   Container,
@@ -45,6 +46,9 @@ export const CookList = () => {
               </TableRow>
             </TableHead>
             <TableBody>
+              {cooks.map((cook) => (
+                <CookItem key={cook.ts} cook={cook} />
+              ))}
             </TableBody>
           </Table>
         </TableContainer>
