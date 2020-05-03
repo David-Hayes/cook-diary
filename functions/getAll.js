@@ -1,4 +1,5 @@
 import faunadb from 'faunadb'
+require('dotenv').config()
 
 const q = faunadb.query
 const client = new faunadb.Client({
